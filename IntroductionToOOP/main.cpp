@@ -44,9 +44,6 @@ public:
 
 	double distance(Point B)
 	{
-		/*double x1 = B.x;
-		double y1 = B.y;
-		double x2 = this->x;*/
 		return sqrt ((this->x - B.x) * (this->x - B.x) + (this->y - B.y) * (this->y - B.y));
 	}
 };
