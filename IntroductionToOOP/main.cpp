@@ -26,34 +26,27 @@ public:
 	}
 
 	//Constructors
-	/*Point()
-	{
-		x = y = 0;
-		cout << "Default constructor " << this << endl;
-	}
-	Point(int x)
-	{
-		this->x = x;
-		this->y = 0;
-		cout << "Constructor:\t\t" << this << endl;
-	}*/
+
 	Point(double x = 0, double y = 0)
 	{
 		this->x = x;
 		this->y = y;
-		cout << "Constructor:\t\t" << this << endl;
+	//	cout << "Constructor:\t\t" << this << endl;
 	}
 	~Point()
 	{
-		cout << "Destructor " << this << endl;
+	//	cout << "Destructor " << this << endl;
 	}
 
 
 	//Methods
 
-	void print() const
+	double distance(Point B)
 	{
-		cout << "X = " << get_x() << "\tY = " << get_y() << endl;
+		/*double x1 = B.x;
+		double y1 = B.y;
+		double x2 = this->x;*/
+		return sqrt ((this->x - B.x) * (this->x - B.x) + (this->y - B.y) * (this->y - B.y));
 	}
 };
 
@@ -61,10 +54,10 @@ public:
 
 void main()
 {
+	setlocale(LC_ALL, "");
 #ifdef STRUCT_POINT
 
 
-	setlocale(LC_ALL, "");
 	Point A;	
 	A.x = 2;
 	A.y = 3;
@@ -74,17 +67,16 @@ void main()
 	cout << pA->x;
 #endif // STRUCT_POINT
 
-	Point A;
-	//A.set_x(2);
-	//A.set_y(3);
-	A.print();
+	Point A(1, 1);
+//	A.print();
+	cout << "Координаты точки А:\tx = " << A.get_x() << ", y = " << A.get_y() << endl;
 
+	Point B(4, 5);
+	cout << "Координаты точки B:\tx = " << B.get_x() << ", y = " << B.get_y() << endl;
+//	C.print();
 
-	Point B = 5;
-	B.print();
-	
-	Point C(7, 8);
-	C.print();
-
-
+	double dist;
+	dist = A.distance(B);	//Как-то так.
+							//за какой пункт это считать? За второй или 3, я не поняла. Это расстояние ДО точки или МЕЖДУ точками... 
+	cout << "Расстояние между точками равно: " << dist << endl;
 }
