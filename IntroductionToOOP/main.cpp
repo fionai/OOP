@@ -3,6 +3,7 @@
 
 using namespace std;
 
+
 class Point
 {
 	double x; 
@@ -50,33 +51,28 @@ public:
 	}
 };
 
-//#define STRUCT_POINT
+
+double distance(Point A, Point B);
 
 void main()
 {
 	setlocale(LC_ALL, "");
-#ifdef STRUCT_POINT
-
-
-	Point A;	
-	A.x = 2;
-	A.y = 3;
-	cout << A.x << "\t" << A.y << endl;
-
-	Point* pA = &A;
-	cout << pA->x;
-#endif // STRUCT_POINT
 
 	Point A(1, 1);
-//	A.print();
 	cout << "Координаты точки А:\tx = " << A.get_x() << ", y = " << A.get_y() << endl;
 
 	Point B(4, 5);
 	cout << "Координаты точки B:\tx = " << B.get_x() << ", y = " << B.get_y() << endl;
-//	C.print();
 
 	double dist;
-	dist = A.distance(B);	//Как-то так.
-							//за какой пункт это считать? За второй или 3, я не поняла. Это расстояние ДО точки или МЕЖДУ точками... 
-	cout << "Расстояние между точками равно: " << dist << endl;
+	dist = A.distance(B);	//Пункт 2. МЕТОД - расстояние до точки В 
+	cout << "Расстояние между точками равно:\n";
+	cout << "Результат вызова метода: " << dist << endl;
+	dist = distance(A, B);	//Пункт 3. ФУНКЦИЯ - расстояние между точками
+	cout << "Результат вызова функции: " << dist << endl;
+}
+
+double distance(Point A, Point B)
+{
+	return sqrt((A.get_x() - B.get_x()) * (A.get_x() - B.get_x()) + (A.get_y() - B.get_y()) * (A.get_y() - B.get_y()));
 }
