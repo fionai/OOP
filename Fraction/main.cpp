@@ -235,6 +235,8 @@ void main()
 
 	cf1 = Fraction(2, 7);
 	cf2 = Fraction(2, 10);
+	cf1.Normal_Minus();
+	cf2.Normal_Minus();
 	cf3 = cf1 + cf2;
 	cf1.Print();
 	cout << " + ";
