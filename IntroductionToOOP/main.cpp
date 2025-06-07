@@ -41,11 +41,11 @@ public:
 	{
 		this->x = x;
 		this->y = y;
-		cout << "Constructor:\t\t" << this << endl;
+	//	cout << "Constructor:\t\t" << this << endl;
 	}
 	~Point()
 	{
-		cout << "Destructor " << this << endl;
+	//	cout << "Destructor " << this << endl;
 	}
 
 
@@ -55,7 +55,13 @@ public:
 	{
 		cout << "X = " << get_x() << "\tY = " << get_y() << endl;
 	}
+	double distance(Point b)
+	{
+		return sqrt((this->x - b.x) * (this->x - b.x) + (this->y - b.y) * (this->y - b.y));
+	}
 };
+
+double distance(Point A, Point B);
 
 //#define STRUCT_POINT
 
@@ -75,16 +81,24 @@ void main()
 #endif // STRUCT_POINT
 
 	Point A;
-	//A.set_x(2);
-	//A.set_y(3);
+	A.set_x(2);
+	A.set_y(3);
 	A.print();
 
 
-	Point B = 5;
+	Point B (7, 8);
 	B.print();
 	
-	Point C(7, 8);
-	C.print();
+	//Point C(7, 8)	
+	// //C.print()
+
+	cout << A.distance(B) << endl;
+	cout << distance(A, B);
+
+}
 
 
+double distance(Point A, Point B)
+{
+	return sqrt((A.get_x() - B.get_x()) * (A.get_x() - B.get_x()) + (A.get_y() - B.get_y()) * (A.get_y() - B.get_y()));
 }
