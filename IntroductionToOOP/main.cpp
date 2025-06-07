@@ -77,7 +77,7 @@ public:
 	{
 		return sqrt((this->x - b.x) * (this->x - b.x) + (this->y - b.y) * (this->y - b.y));
 	}
-};
+};		//class Point
 
 double distance(const Point& A, const Point& B);
 
