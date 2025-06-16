@@ -33,7 +33,7 @@ public:
 	}
 	~String()
 	{
-		//delete[] this->value;  //Я не смогла победить это
+		//delete[] this->value;  //Я не смогла победить это. Вылетает после методов Присвоения
 		cout << "Constructor. delete \t\t" << this << endl;
 	}
 	//              Operators
