@@ -1,6 +1,7 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include <iostream>
 using namespace std;
+using std::cout;
 
 #define delimiter "\n------------------------------------------------\n"
 
@@ -130,6 +131,15 @@ public:
 		Fraction old = *this;
 		*this = *this - Fraction(1);
 		return old;
+	}
+	//Type-cast operastors
+	 operator int() const
+	{
+		return integer + numerator / denominator;
+	}
+	 operator double() const
+	{
+		return integer + (double)numerator / denominator;
 	}
 	//				Methods
 	Fraction& to_improper() //переводит дробь в неправильную
@@ -261,14 +271,11 @@ std::istream& operator>> (std::istream& is, Fraction& obj)
 	int n = 0;
 	for (char* pch = strtok(sz_input, delimiters); pch && n<3; pch = strtok(NULL, delimiters))
 		numbers[n++] = atoi(pch);
-	/*for (int i = 0; i < n; i++) 
-		cout << numbers[i] << "\t";
-	cout << endl;*/
 
 	switch (n)
 	{
 	case 1:obj = numbers[0]; break;
-	case 2:obj = Fraction(numbers[0], numbers[1]); break;
+	case 2:obj = Fraction(numbers[0], numbers[1]); break; 
 	case 3:obj = Fraction(numbers[0], numbers[1], numbers[2]); break;
 	}
 
@@ -280,6 +287,8 @@ std::istream& operator>> (std::istream& is, Fraction& obj)
 //#define ARITHMETICAL_OPERATORS
 //#define INC_DEC
 //#define COMPARISON
+//#define ISTREAM_OPERATOR
+
 
 void main()
 {
@@ -423,9 +432,19 @@ void main()
 
 #endif // COMPARISON
 
+#ifdef ISTREAM_OPERATOR
 	Fraction A;
 	cout << "¬ведите дробь: ";
 	cin >> A;
 	cout << A << endl;
+#endif // ISTREAM_OPERATOR
 
+	Fraction A(2, 5, 4);
+	cout << A << endl;
+
+	int a = A;
+	cout << a << endl;
+
+	double b = A;
+	cout << b << endl;
 }
