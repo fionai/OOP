@@ -1,3 +1,4 @@
+#define _CRT_SECURE_NO_WARNINGS
 #include <iostream>
 using namespace std;
 
@@ -243,14 +244,35 @@ std::ostream& operator<< (std::ostream& os, Fraction& obj)
 	}
 	return os;
 }
-std::istream& operator>> (std::istream& os, Fraction& obj)
+std::istream& operator>> (std::istream& is, Fraction& obj)
 {
-	int n1, n2, n3;
-	cin >> n1 >> n2 >> n3;
-	obj.set_integer(n1);
-	obj.set_numerator(n2);
-	obj.set_denominator(n3);
-	return os;
+	/*int integer, numerator, denominator;
+	is >> integer >> numerator >> denominator;
+	obj.set_integer(integer);
+	obj.set_numerator(numerator);
+	obj.set_denominator(denominator);*/
+	
+	const int SIZE = 32;
+	char sz_input[SIZE] = {};
+	//is >> sz_input;
+	is.getline(sz_input, SIZE);
+	const char delimiters[] = { '/', '(', ')', ' ', '.', ',', 0};
+	int numbers[3] = {};
+	int n = 0;
+	for (char* pch = strtok(sz_input, delimiters); pch && n<3; pch = strtok(NULL, delimiters))
+		numbers[n++] = atoi(pch);
+	/*for (int i = 0; i < n; i++) 
+		cout << numbers[i] << "\t";
+	cout << endl;*/
+
+	switch (n)
+	{
+	case 1:obj = numbers[0]; break;
+	case 2:obj = Fraction(numbers[0], numbers[1]); break;
+	case 3:obj = Fraction(numbers[0], numbers[1], numbers[2]); break;
+	}
+
+	return is;
 }
 
 //#define CONSRTUCTIONS_CHECK

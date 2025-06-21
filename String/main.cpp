@@ -1,6 +1,9 @@
 ﻿#include <iostream>
 using namespace std;
 
+class String;
+std::ostream& operator<< (std::ostream& os, String& str);
+
 class String
 {
 	int len;			//длина строки (кол-во символов + 1)
@@ -56,6 +59,8 @@ public:
 	String operator= (String other)		//присваивание переменной типа String
 	{
 		this->len = other.len;
+		delete[] this->value;
+		cout << "delete \t\t" << this << endl;
 		this->value = new char[this->len];
 		cout << "AssignString. new char[]\t" << this << endl;
 		for (int i = 0; i < other.len; i++)
@@ -69,7 +74,6 @@ public:
 		String s3;
 		s3.len = this->len + s2.len - 1;
 		s3.value = new char[s3.len];
-		cout << "operator+. new char[]\t\t" << this << endl;
 		for (int i = 0; i < s3.len; i++)
 		{
 			if (i < this->len-1)
@@ -77,6 +81,7 @@ public:
 			else
 				s3.value[i] = s2.value[i - this->len + 1];
 		}
+		cout << "operator+. new char[]\t\t" << &s3 << endl;
 		return s3;
 	}
 };
@@ -96,6 +101,7 @@ void main()
 	String str1 = "Hello";
 	String str2 = "World";
 	String str3;
+	str3 = "Rrrr";
 	str3 = str1 + ", " + str2 + "!";
 	cout << "\t\t\t\t\t\t" << str3 << endl;
 }
