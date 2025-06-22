@@ -97,8 +97,7 @@ std::istream& operator>> (std::istream& is, String& obj)
 	char buf[SIZE] = {};
 	is.getline(buf, SIZE);
 	//cout << (int)buf[0] << "--" << (int)'п'<< endl;
-	String str3(buf);
-	obj = str3;
+	obj = buf;
 	return is;
 }
 void main()
