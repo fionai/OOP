@@ -93,8 +93,10 @@ std::ostream& operator<< (std::ostream& os, const String& obj)
 }
 std::istream& operator>> (std::istream& is, String& obj)
 {
-	char buf[100] = {};
-	is.getline(buf, 500);
+	const int SIZE = 500;
+	char buf[SIZE] = {};
+	is.getline(buf, SIZE);
+	//cout << (int)buf[0] << "--" << (int)'п'<< endl;
 	String str3(buf);
 	obj = str3;
 	return is;
@@ -112,14 +114,17 @@ void main()
 
 	String str3;
 	str3 = str1 + " " +str2;
-	cout << "\t\t\t\t\t+\t" << str3 << endl;
+	cout << "\t\t\t\t+\t" << str3 << endl;
 
 	String str4 = "teacher";
 	str3 += (String)", " + str4 + "!";
-	cout << "\t\t\t\t\t+=\t" << str3 << endl;
+	cout << "\t\t\t\t+=\t" << str3 << endl;
 
 	String str5;
 	cout << "Введите строку: ";
+	cin >> str5;
+	cout << "\t\t\t\tВы ввели " << str5 << endl;
+	cout << "Объявились проблемы с русской кодировкой.\nОлег Анатольевич, введите строку на кириллице: ";
 	cin >> str5;
 	cout << "\t\t\t\tВы ввели " << str5 << endl;
 }
