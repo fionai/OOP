@@ -80,26 +80,27 @@ public:
 		cout << "Destructor\t\t" << this << endl;
 	}
 	//Operators
-	Matrix& operator= (const Matrix& other)
+	Matrix operator= (Matrix other)
 	{
 		if (this == &other)
 			return *this;
-		for (int i = 0; i < rows; i++)
-			delete[] m[i];
-		delete[] m;
 
 		this->rows = other.rows;
 		this->cols = other.cols;
-		this->m = new double*[rows] {};
 		for (int i = 0; i < rows; i++)
-			this->m[i] = new double[cols] {};
+			delete[] this->m[i];	
+		delete[] this->m;
 
+		this->m = new double*[this->rows] {};
 		for (int i = 0; i < rows; i++)
-			for (int j = 0; j < cols; j++)
+			this->m[i] = new double[this->cols] {};
+
+		for (int i = 0; i < this->rows; i++)
+			for (int j = 0; j < this->cols; j++)
 				this->m[i][j] = other.m[i][j];
 		cout << "CopyAssignment:\t\t" << this << endl; //Побитовое копирование
 	}
-	/*Matrix& operator= (double ** arr,  int rows,  int cols)							//Почему так ругается?
+	/*Matrix operator= (double** arr,  int rows,  int cols)							//Почему так ругается?
 	{
 		for (int i = 0; i < rows; i++)
 			delete[] m[i];
@@ -116,14 +117,19 @@ public:
 				this->m[i][j] = arr[i][j];
 		cout << "CopyAssignment:\t\t" << this << endl; //Побитовое копирование
 	}*/
-	Matrix& operator+ (const Matrix& other)
+	Matrix operator+ (const Matrix other)
 	{
 		/*if (this->rows != other.rows || this->cols != other.cols)
 		{
 			bool error = 1;
 			return Matrix(error);
 		}*/
-		Matrix m3(this->rows, this->cols);
+		Matrix m3;
+		m3.rows = this->rows;
+		m3.cols = this->cols;
+		m3.m = new double*[rows];
+		for (int i = 0; i < rows; i++)
+			m3.m[i] = new double[cols];
 		for (int i = 0; i < rows; i++)
 		{
 			for (int j = 0; j < cols; j++)
@@ -131,6 +137,7 @@ public:
 				m3.m[i][j] = this->m[i][j] + other.m[i][j];
 			}
 		}
+		cout << "operator+ \t\t" << &m3 << endl;
 		return m3;
 	}
 	// Methods
@@ -192,7 +199,7 @@ void main()
 	m2.PrintM();
 
 	Matrix m3;
-	m3 = m1 + m2;			//пока без проверок размерностей. Не поняла, как использовать признак ошибки
+	m3 = m1 + m2;			//пока без проверок размерностей. Не придумала, как использовать признак ошибки
 	m3.PrintM();
 
 	for (int i = 0; i < r1; i++)												//arr1 delete
