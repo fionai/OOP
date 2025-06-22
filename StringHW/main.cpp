@@ -1,4 +1,4 @@
-#include <iostream>
+п»ї#include <iostream>
 using namespace std;
 
 class String
@@ -37,7 +37,7 @@ public:
 		this->str = new char[size] {0};
 		for (int i = 0; i < size; i++)
 			this->str[i] = other.str[i];
-		cout << "DeepCopy:\t\t" << this << endl; //Побитовое копирование
+		cout << "DeepCopy:\t\t" << this << endl; //РџРѕР±РёС‚РѕРІРѕРµ РєРѕРїРёСЂРѕРІР°РЅРёРµ
 	}
 	~String()
 	{
@@ -56,7 +56,7 @@ public:
 		this->str = new char[size] {0};
 		for (int i = 0; i < size; i++)
 			this->str[i] = other.str[i];
-		cout << "CopyAssignment:\t\t" << this << endl; //Побитовое копирование
+		cout << "CopyAssignment:\t\t" << this << endl; //РџРѕР±РёС‚РѕРІРѕРµ РєРѕРїРёСЂРѕРІР°РЅРёРµ
 		return *this;
 	}
 	String operator+ (const String& other) 
@@ -102,7 +102,7 @@ std::istream& operator>> (std::istream& is, String& obj)
 void main()
 {
 	setlocale(LC_ALL, "");
-	String str1 = "Good";		//explicit конструктор нельзя вызвать оператором Присвоить, но всегда можно вызвать при помощи ()
+	String str1 = "Good";		//explicit РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ РЅРµР»СЊР·СЏ РІС‹Р·РІР°С‚СЊ РѕРїРµСЂР°С‚РѕСЂРѕРј РџСЂРёСЃРІРѕРёС‚СЊ, РЅРѕ РІСЃРµРіРґР° РјРѕР¶РЅРѕ РІС‹Р·РІР°С‚СЊ РїСЂРё РїРѕРјРѕС‰Рё ()
 	str1.info();
 	cout << str1 << endl;
 
@@ -119,7 +119,7 @@ void main()
 	cout << "\t\t\t\t\t+=\t" << str3 << endl;
 
 	String str5;
-	cout << "Введите строку: ";
+	cout << "Р’РІРµРґРёС‚Рµ СЃС‚СЂРѕРєСѓ: ";
 	cin >> str5;
-	cout << "\t\t\t\tВы ввели " << str5 << endl;
+	cout << "\t\t\t\tР’С‹ РІРІРµР»Рё " << str5 << endl;
 }
