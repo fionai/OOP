@@ -104,7 +104,7 @@ std::istream& operator>> (std::istream& is, String& obj)
 void main()
 {
 	setlocale(LC_ALL, "");
-	String str1 = "Good";		//explicit конструктор нельзя вызвать оператором Присвоить, но всегда можно вызвать при помощи ()
+	String str1 = "Good";	
 	str1.info();
 	cout << str1 << endl;
 
@@ -124,7 +124,7 @@ void main()
 	cout << "Введите строку: ";
 	cin >> str5;
 	cout << "\t\t\t\tВы ввели " << str5 << endl;
-	cout << "Объявились проблемы с русской кодировкой.\nОлег Анатольевич, введите строку на кириллице: ";
+	cout << "Объявились проблемы с русской кодировкой.\nВведите строку на кириллице: ";
 	cin >> str5;
 	cout << "\t\t\t\tВы ввели " << str5 << endl;
 }
