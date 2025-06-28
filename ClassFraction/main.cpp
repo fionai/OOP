@@ -67,6 +67,15 @@ public:
 		this->denominator = denominator;
 		//cout << "Construction:\t\t" << this << endl;
 	}
+	Fraction(double decimal)
+	{
+		decimal += 1e-10;
+		integer = decimal;
+		decimal -= integer;
+		denominator = 1e+9;
+		numerator = decimal * denominator;
+		Reduce();
+	}
 	Fraction(int integer , int numerator , int denominator )
 	{
 		set_integer(integer);
@@ -146,6 +155,29 @@ public:
 	{
 		numerator += integer * denominator;
 		integer = 0;
+		return *this;
+	}
+	Fraction& Reduce()
+	{
+		int more, less, rest;
+		if (numerator < denominator)
+		{
+			less = numerator;
+			more = denominator;
+		}
+		else
+		{
+			more = numerator;
+			less = denominator;
+		}
+		do
+		{
+			rest = more % less;
+			more = less;
+			less = rest;
+		} while (rest);
+		numerator /= more;
+		denominator /= more;
 		return *this;
 	}
 	Fraction& to_proper()
@@ -288,6 +320,7 @@ std::istream& operator>> (std::istream& is, Fraction& obj)
 //#define INC_DEC
 //#define COMPARISON
 //#define ISTREAM_OPERATOR
+//#define CONVERTION_FROM_CLASS_TO_OTHER
 
 
 void main()
@@ -439,6 +472,9 @@ void main()
 	cout << A << endl;
 #endif // ISTREAM_OPERATOR
 
+#ifdef CONVERTION_FROM_CLASS_TO_OTHER
+
+
 	Fraction A(2, 5, 4);
 	cout << A << endl;
 
@@ -447,4 +483,8 @@ void main()
 
 	double b = A;
 	cout << b << endl;
+#endif // CONVERTION_FROM_CLASS_TO_OTHER
+
+	Fraction A = 2.76;
+	cout << A << endl;
 }
