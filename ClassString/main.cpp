@@ -14,7 +14,10 @@ public:
 	{
 		return str;
 	}
-
+	char* get_str()
+	{
+		return str;
+	}
 	//		constructors
 	explicit String(int size = 80)
 	{
@@ -59,6 +62,14 @@ public:
 		cout << "CopyAssignment:\t\t" << this << endl; //Побитовое копирование
 		return *this;
 	}
+	char operator[] (int i) const
+	{
+		return str[i];
+	}
+	char& operator[] (int i) 
+	{
+		return str[i];
+	}
 	//		Metods
 	void info() const
 	{
@@ -67,13 +78,24 @@ public:
 	}
 };
 
+String operator+(const String& left, const String right)
+{
+	String result( left.get_size() + right.get_size() - 1);
+	for (int i = 0; left[i]; i++)
+		result[i] = left[i];
+	for (int i = 0; right[i]; i++)
+		result[left.get_size() - 1 + i] = right[i];
+	return result;
+}
+
 std::ostream& operator<< (std::ostream& os, const String& obj)
 {
 	return os << obj.get_str();
 }
-
+//#define CONSTRUCTORS_CHECK
 void main()
 {
+#ifdef CONSTRUCTORS_CHECK
 	setlocale(LC_ALL, "");
 	String str1(5);		//explicit конструктор нельзя вызвать оператором Присвоить, но всегда можно вызвать при помощи ()
 	str1.info();
@@ -88,4 +110,11 @@ void main()
 	String str4;
 	str4 = str3;
 	cout << str4 << endl;
+#endif // CONSTRUCTORS_CHECK
+
+	String str1 = "Hello";
+	String str2 = "World";
+	String str3 = str1 + ", " + str2 + "!";
+	cout << str3 << endl;
+
 }
