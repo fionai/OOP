@@ -1,16 +1,17 @@
 #include <iostream>
+#include<conio.h>
+
 using namespace std;
 
 class Matrix;
 void FillRand(double** arr, const int rows, const int cols);
 void Print(double** arr, const int rows, const int cols);
 
-
 class Matrix
 {
 	int rows; //количество строк
 	int cols; //количество столбцов
-	double** m;
+	double** arr;
 	//bool err;
 public:
 	int get_rows() const
@@ -21,9 +22,9 @@ public:
 	{
 		return cols;
 	}
-	double** get_m() const
+	double** get_arr() const
 	{
-		return m;
+		return arr;
 	}
 	//		constructors
 	Matrix(int rows = 1, int cols = 1)							// default or measurements
@@ -31,9 +32,9 @@ public:
 		this->rows = rows;
 		this->cols = cols;
 		//err = 0;
-		this->m = new double*[rows] {};
+		this->arr = new double*[rows] {};
 		for (int i = 0; i < rows; i++)
-			this->m[i] = new double[cols] {};
+			this->arr[i] = new double[cols] {};
 		cout << "DefaultConstruction\t" << this << endl;
 	}
 	Matrix(double** arr, const   int rows, const   int cols)		//array and measurements
@@ -41,12 +42,12 @@ public:
 		this->rows = rows;
 		this->cols = cols;
 		//this->err = 0;
-		this->m = new double*[rows] {};
+		this->arr = new double*[rows] {};
 		for (int i = 0; i < rows; i++)
-			this->m[i] = new double[cols] {};
+			this->arr[i] = new double[cols] {};
 		for (int i = 0; i < rows; i++)
 			for (int j = 0; j < cols; j++)
-				this->m[i][j] = arr[i][j];
+				this->arr[i][j] = arr[i][j];
 		cout << "array and measurements\t" << this << endl;
 	}
 	Matrix(const Matrix& other)									//Matrix
@@ -54,108 +55,293 @@ public:
 		this->rows = other.rows;
 		this->cols = other.cols;
 		//this->err = 0;
-		this->m = new double*[rows] {};
+		this->arr = new double*[rows] {};
 		for (int i = 0; i < rows; i++)
-			this->m[i] = new double[cols] {};
+			this->arr[i] = new double[cols] {};
+
 		for (int i = 0; i < rows; i++)
 			for (int j = 0; j < cols; j++)
-				this->m[i][j] = other.m[i][j];
+				this->arr[i][j] = other.arr[i][j];
 		cout << "DeepCopy:\t\t" << this << endl; //Побитовое копирование
 	}
-	/*Matrix(const bool err)
-	{
-		this->rows = 1;
-		this->cols = 1;
-		this->err = err;
-		this->m = new double*[this->rows]{};
-		this->m[0] = new double[this->cols]{};
-	}*/
 	~Matrix()
 	{
 		for (int i = 0; i < rows; i++)
-			delete[] m[i];
-		delete[] m;
+			delete[] arr[i];
+		delete[] arr;
 		this->rows = 0;
 		this->cols = 0;
 		cout << "Destructor\t\t" << this << endl;
 	}
+
 	//Operators
-	Matrix operator= (Matrix other)
+	Matrix& operator= (const Matrix& other)
 	{
 		if (this == &other)
 			return *this;
+		////////////////////////////////////////////////////////////
+		for (int i = 0; i < rows; i++)
+			delete[] this->arr[i];	
+		delete[] this->arr;
+		////////////////////////////////////////////////////////////
 
 		this->rows = other.rows;
 		this->cols = other.cols;
-		for (int i = 0; i < rows; i++)
-			delete[] this->m[i];	
-		delete[] this->m;
 
-		this->m = new double*[this->rows] {};
+		this->arr = new double*[this->rows] {};
 		for (int i = 0; i < rows; i++)
-			this->m[i] = new double[this->cols] {};
+			this->arr[i] = new double[this->cols] {};
 
 		for (int i = 0; i < this->rows; i++)
 			for (int j = 0; j < this->cols; j++)
-				this->m[i][j] = other.m[i][j];
+				this->arr[i][j] = other.arr[i][j];
 		cout << "CopyAssignment:\t\t" << this << endl; //Побитовое копирование
 	}
-	/*Matrix operator= (double** arr,  int rows,  int cols)							//Почему так ругается?
-	{
-		for (int i = 0; i < rows; i++)
-			delete[] m[i];
-		delete[] m;
-
-		this->rows = other.rows;
-		this->cols = other.cols;
-		this->m = new double*[rows] {};
-		for (int i = 0; i < rows; i++)
-			this->m[i] = new double[cols] {};
-
-		for (int i = 0; i < rows; i++)
-			for (int j = 0; j < cols; j++)
-				this->m[i][j] = arr[i][j];
-		cout << "CopyAssignment:\t\t" << this << endl; //Побитовое копирование
-	}*/
 	Matrix operator+ (const Matrix other)
 	{
-		/*if (this->rows != other.rows || this->cols != other.cols)
+		if (this->rows != other.rows || this->cols != other.cols) //невозможно вычислить
 		{
-			bool error = 1;
-			return Matrix(error);
-		}*/
+			Matrix result(1, 1);
+			return result;
+		}
 		Matrix m3;
 		m3.rows = this->rows;
 		m3.cols = this->cols;
-		m3.m = new double*[rows];
+		m3.arr = new double*[rows];
 		for (int i = 0; i < rows; i++)
-			m3.m[i] = new double[cols];
+			m3.arr[i] = new double[cols];
 		for (int i = 0; i < rows; i++)
 		{
 			for (int j = 0; j < cols; j++)
 			{
-				m3.m[i][j] = this->m[i][j] + other.m[i][j];
+				m3.arr[i][j] = this->arr[i][j] + other.arr[i][j];
 			}
 		}
 		cout << "operator+ \t\t" << &m3 << endl;
 		return m3;
 	}
+	Matrix& operator*(int value)		//умножение на число
+	{
+		for (int i = 0; i < rows; i++)
+		{
+			for (int j = 0; j < cols; j++)
+			{
+				this->arr[i][j] *= value;
+			}
+		}
+		return *this;
+	}
+
 	// Methods
+	void FillRand(int minRand = 0, int maxRand = 10)
+	{
+		for (int i = 0; i < rows; i++)
+		{
+			for (int j = 0; j < cols; j++)
+			{
+				arr[i][j] = rand() % (maxRand - minRand) + minRand;
+			}
+		}
+	}
 	void PrintM() const			//с именем Print почему-то возникла путаница. Хотя количество аргументов разное, но метод пытался вызвать метод, а не функцию. Пришлось поменять имя метода
 	{
-		Print(this->m, this->rows, this->cols);
+		Print(this->arr, this->rows, this->cols);
 	}
-};
-
-
-void FillRand(double** arr, const int rows, const int cols)
-{
-	for (int i = 0; i < rows; i++)
-		for (int j = 0; j < cols; j++)
+	Matrix& Inverse()
+	{
+		if (rows != cols)
 		{
-			arr[i][j] = double(rand() % 10000) / 100;
+			for (int i = 0; i < this->rows; i++)
+				delete[] arr[i];
+			delete[] arr;
+			rows = 1;
+			cols = 1;
+			arr = new double* [rows] {};
+			arr[0] = new double[cols] {};
+			return *this;
 		}
+		else
+		{
+			int first_element = 0;
+			int ind = 0;
+			while (!first_element && ind < rows)
+			{
+				if (arr[ind][0])
+					first_element = arr[ind][0];
+				ind++;
+			}
+			ind--;
+			if (!first_element) //если весь первый столбец нулевой, обратной матрицы не существует
+			{
+				for (int i = 0; i < this->rows; i++)
+					delete[] arr[i];
+				delete[] arr;
+				rows = 1;
+				cols = 1;
+				arr = new double* [rows] {};
+				arr[0] = new double[cols] {};
+				return *this;
+			}
+			else  //вот теперь ищем обратную матрицу
+			{
+				Matrix res(rows, cols);
+				res.to_e();
+
+				cout << "res to e\n";
+				res.PrintM();
+
+				for (int i = 0; i < rows; i++)						//ПРЯМОЙ ОБХОД
+				{
+					if (!arr[i][i])  //если диагональный эл-т = 0, меняем строки местами
+					{
+						ind = 0;
+						for (int k = i + 1; k < rows; k++)
+						{
+							if (arr[k][i] && !ind)
+								ind = k;						//находим строку, где элемент ненулевой
+						}
+						this->ChangeLines(i, ind);
+						res.ChangeLines(i, ind);
+						cout << "this change lines\n";
+						this->PrintM();
+						cout << "res change lines\n";
+						res.PrintM();
+					}
+
+					double denominator = arr[i][i];			//приводим диагональный элемент к единице, преобразовывая всю строку
+					this->DivideLine(i, denominator);
+					res.DivideLine(i, denominator);
+
+					cout << "DivideLine" << i << " / " << denominator << endl << "this" << endl;
+					this->PrintM();
+					cout << "res\n";
+					res.PrintM();
+
+					for (int j = i + 1; j < rows; j++)
+					{
+						if (i != j && arr[j][i] && arr[i][i])
+						{
+							double multiplier = arr[j][i] / arr[i][i];
+							this->Subtraction(j, i, multiplier);
+							res.Subtraction(j, i, multiplier);
+							cout << "Subtruction line " << j << " " << i << " * " << multiplier << endl << "this\n";
+							this->PrintM();
+							cout << "res\n";
+							res.PrintM();
+						}
+					}
+				}  //получили: по диагонали единицы, под диагональю нули
+
+				cout << "\nREVERSE\n";
+				for (int i = rows - 1; i >= 0; i--)				//ОБРАТНЫЙ ОБХОД
+				{
+					for (int j = i - 1; j >= 0; j--)
+					{
+						double multiplier = arr[j][i] / arr[i][i];
+						this->Subtraction(j, i, multiplier);
+						res.Subtraction(j, i, multiplier);
+						cout << "Subtruction line " << j << " " << i << " * " << multiplier << endl << "this\n";
+						this->PrintM();
+						cout << "res\n";
+						res.PrintM();
+
+					}
+				}
+
+				//вывод результата
+				for (int i = 0; i < rows; i++)
+					for (int j = 0; j < cols; j++)
+						this->arr[i][j] = res.arr[i][j];
+				return *this;
+			}
+		}
+	}
+	Matrix& to_e()	//Записывает единичную матрицу
+	{
+		int buf = 0;
+		for (int i = 0; i < rows; i++)
+			for (int j = 0; j < cols; j++)
+			{
+				if (i == j)
+					arr[i][j] = 1;
+				else
+					arr[i][j] = 0;
+			}
+		return *this;
+	}
+	Matrix& ChangeLines(int first, int second)
+	{
+		int buf = 0;
+		for (int i = 0; i < cols; i++)
+		{
+			buf = arr[first][i];
+			arr[first][i] = arr[second][i];
+			arr[second][i] = buf;
+		}
+		return *this;
+	}
+	Matrix& MultiplyLine(int line_num, double value)
+	{
+		for (int i = 0; i < cols; i++)
+			arr[line_num][i] *= value;
+		return *this;
+	}
+	Matrix& DivideLine(int line_num, double value)
+	{
+		if (value)
+			this->MultiplyLine(line_num, 1 / value);
+		return *this;
+	}
+	Matrix& Subtraction(int minued, int subtrahed, double value = 1)   // minued - subtrahed * value
+	{
+		for (int i = 0; i < cols; i++)
+		{
+			arr[minued][i] -= arr[subtrahed][i] * value;
+		}
+		return *this;
+	}
+};  // CLass Matrix
+
+Matrix operator*(const Matrix left, const Matrix right) //умножение двух матриц
+{
+
+	if (left.get_cols() != right.get_rows()) // Если не соблюдаются условия по размерности для перемножения
+	{
+		Matrix C;
+		return C;
+	}
+
+	int c_rows = left.get_rows(), c_cols = right.get_cols();
+	Matrix C(c_rows, c_cols);
+
+
+	for (int i = 0; i < c_rows; i++)
+		for (int j = 0; j < c_cols; j++)
+		{
+			C.get_arr()[i][j] = 0;
+			for (int r = 0; r < right.get_rows(); r++)
+				C.get_arr()[i][j] += left.get_arr()[i][r] * right.get_arr()[r][j];
+		}
+
+	return C;
 }
+Matrix operator/(const Matrix left, const Matrix right) //деление матриц
+{
+	Matrix dub, result;
+	dub = right;
+	dub.Inverse();
+	result = left * dub;
+	return result;
+}
+
+//void FillRand(double** arr, const int rows, const int cols)
+//{
+//	for (int i = 0; i < rows; i++)
+//		for (int j = 0; j < cols; j++)
+//		{
+//			arr[i][j] = double(rand() % 10000) / 100;
+//		}
+//}
 void Print(double** arr, const int rows, const int cols)
 {
 	for (int i = 0; i < rows; i++)
@@ -168,52 +354,86 @@ void Print(double** arr, const int rows, const int cols)
 	}
 }
 
+
 void main()
 {
 	setlocale(LC_ALL, "");
-	//Matrix m1{ {0, 1, 2}, {0, 1, 2}, {4, 5,6 }, {0, 1, 2} };            //так не получается. Буду пробовать через массивы
-	int r1 = 3, c1 = 4; //измерения массива
-	int r2 = 3, c2 = 4; //измерения массива
-	double** arr1 = new double* [r1];											//arr1 create
-	for (int i = 0; i < r1; i++)
-	{
-		arr1[i] = new double[c1];
-	}
-	double** arr2 = new double*[r2];											//arr2 create
-	for (int i = 0; i < r2; i++)
-	{
-		arr2[i] = new double[c2];
-	}
-	
-	FillRand(arr1, r1, c1);
-//	Print(arr1, r1, c1);
-	cout << endl;
-	FillRand(arr2, r2, c2);
-//	Print(arr2, r2, c2);
 
+	cout << "\t\tСЛОЖЕНИЕ\n\n";
 
-	Matrix m1 (arr1, r1, c1);
-	m1.PrintM();
+	Matrix A(4, 3);
+	A.FillRand();
+	cout << "  A\n";
+	A.PrintM();
 
-	Matrix m2 (arr2, r2, c2);
-	m2.PrintM();
+	Matrix B(4, 3);
+	B.FillRand();
+	cout << "  B\n";
+	B.PrintM();
 
-	Matrix m3;
-	m3 = m1 + m2;			//пока без проверок размерностей. Не придумала, как использовать признак ошибки
-	m3.PrintM();
+	Matrix C;
+	C = A + B;
+	cout << "  A + B =\n";
+	C.PrintM();
 
-	for (int i = 0; i < r1; i++)												//arr1 delete
-		delete[] arr1[i];
-	delete[] arr1;
-	for (int i = 0; i < r2; i++)												//arr2 delete
-		delete[] arr2[i];
-	delete[] arr2;
-}
+	getch();
+	system("cls");
 
+	cout << "\t\tУМНОЖЕНИЕ НА ЧИСЛО\n\n  A\n";
+	A.PrintM();
+	Matrix D;
+	cout << "  A * 3 =\n";
+	D = A * 3;
+	D.PrintM();
 
+	getch();
+	system("cls");
+	cout << "\t\tУМНОЖЕНИЕ ДВУХ МАТРИЦ\n\n  A\n";
+	Matrix A1(3, 5);
+	A1.FillRand();
+	A1.PrintM();
+	cout << "  B\n";
+	Matrix B1(5, 4);
+	B1.FillRand();
+	B1.PrintM();
+	Matrix E = A1 * B1;
+	cout << "  A * B =\n";
+	E.PrintM();
 
+	getch();
+	system("cls");
+	cout << "\t\tОБРАТНАЯ МАТРИЦА\n\n  A\n";
+	Matrix A2(4, 4), DUB(4,4), TEST(4,4);
+	A2.FillRand();
+	A2.get_arr()[0][0] = 0;
+	A2.get_arr()[1][0] = 0;
+	A2.get_arr()[1][1] = 0;
 
+	DUB = A2;
 
+	A2.PrintM();
+	A2.Inverse();
+	cout << "\n----------------\nInverse matrix:\n----------------\n";
+	A2.PrintM();
+	cout << "\n----------------\n";
 
+	TEST = DUB * A2;
+	cout << "\n----------------\ntest\n----------------\n";
+	TEST.PrintM();
+	cout << "\n----------------\n";
 
+	getch();
+	system("cls");
+	cout << "\t\tДЕЛЕНИЕ\n\n";
+	Matrix A3(4, 4), B3(4, 4), C3 (4, 4);
+	A3.FillRand();
+	B3.FillRand();
+	C3 = A3 / B3;
 
+	cout << "  A\n";
+	A3.PrintM();
+	cout << "  B\n";
+	B3.PrintM();
+	cout << "A / B =\n";
+	C3.PrintM();
+ }

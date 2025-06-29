@@ -1,6 +1,7 @@
 #include<Windows.h>
 #include <iostream>
 using namespace std;
+#define delimiter "\n----------------------------------\n"
 
 class String
 {
@@ -43,6 +44,14 @@ public:
 			this->str[i] = other.str[i];
 		cout << "DeepCopy:\t\t" << this << endl; //ѕобитовое копирование
 	}
+	String(String&& other)
+	{
+		this->size = other.size;
+		this->str = other.str;
+		other.size = 0;
+		other.str = nullptr;//защищаем пам€т от удалени€ деструктором
+		cout << "MoveConstructor:\t" << this << endl;
+	}
 	~String()
 	{
 		delete[] str;
@@ -63,6 +72,17 @@ public:
 		cout << "CopyAssignment:\t\t" << this << endl; //ѕобитовое копирование
 		return *this;
 	}
+	String& operator=(String&& other)
+	{
+		if (this == &other) return *this;
+		delete[] this->str;
+		this->size = other.size;
+		this->str = other.str;
+		other.size = 0;
+		other.str = nullptr;
+		cout << "MoveAssignment:\t\t" << this << endl;
+		return *this;
+	}
 	char operator[] (int i) const
 	{
 		return str[i];
@@ -79,13 +99,14 @@ public:
 	}
 };
 
-String operator+(const String& left, const String right)
+String operator+(const String& left, const String& right)
 {
 	String result( left.get_size() + right.get_size() - 1);
 	for (int i = 0; left[i]; i++)
 		result[i] = left[i];
 	for (int i = 0; right[i]; i++)
 		result[left.get_size() - 1 + i] = right[i];
+	cout << "Operator+\n";
 	return result;
 }
 
@@ -109,8 +130,9 @@ std::istream& getline(std::istream& cin, String& obj)
 }
 
 //#define OPRATOR_PLUS
-
 //#define CONSTRUCTORS_CHECK
+//#define ISTREAM_OPERATOR
+
 void main()
 {
 #ifdef CONSTRUCTORS_CHECK
@@ -133,10 +155,14 @@ void main()
 #ifdef OPRATOR_PLUS
 	String str1 = "Hello";
 	String str2 = "World";
-	String str3 = str1 + ", " + str2 + "!";
+	cout << delimiter << endl;
+	String str3;
+	str3 = str1 + str2;
+	cout << delimiter << endl;
 	cout << str3 << endl;
 #endif // OPRATOR_PLUS
 
+#ifdef ISTREAM_OPERATOR
 	String str;
 	cout << "Enter a string: ";
 	SetConsoleCP(1251);
@@ -145,5 +171,7 @@ void main()
 	//cin.getline(str.get_str(), str.get_size());
 	getline(cin, str);
 	cout << str << endl;
+#endif // ISTREAM_OPERATOR
+
 
 }
