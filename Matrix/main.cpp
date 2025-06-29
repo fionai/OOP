@@ -417,7 +417,7 @@ void main()
 	A2.PrintM();
 	cout << "\n----------------\n";
 
-	TEST = DUB * A2;
+	TEST = DUB * A2;			//контрольная проверкаы
 	cout << "\n----------------\ntest\n----------------\n";
 	TEST.PrintM();
 	cout << "\n----------------\n";
