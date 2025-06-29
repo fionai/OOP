@@ -740,9 +740,9 @@ void main()
 	// перемножить 2 матрицы					- OK
 	// найти обратную							- OK
 	// пройти ТЕСТ с обратной					- OK!!!!!!!!!!!!!!!!!!
-	//
+	// достаточно
 
-	Matrix M1(3, 3);
+	Matrix M1(4, 4);
 	M1.FillRand();
 	cout << "  M1\n";
 	M1.PrintM();
@@ -772,25 +772,29 @@ void main()
 	cout << "  M1 * 1/2 =\n";
 	M3.PrintM();
 
-	M3 = M1 * M2;
+	Matrix N1(3, 4), N2(4, 5);
+	Matrix N3;
+	N1.FillRand();
+	N2.FillRand();
+	N3 = N1 * N2;
 	cout << "\n\nУМНОЖЕНИЕ\n  M1\n";
-	M1.PrintM();
+	N1.PrintM();
 	cout << "  M2\n";
-	M2.PrintM();
+	N2.PrintM();
 	cout << "  M1 * M2 =\n";
-	M3.PrintM();
+	N3.PrintM();
 
 	Matrix dub = M1;
 	cout << "\n\nНАЙТИ ОБРАТНУЮ МАТРИЦУ\n  M1\n";
 	dub.PrintM();
 	dub.Inverse();
-	cout << "  обратная матрица M1(-1)\n";
+	cout << "--------обратная матрица---------\n";
 	dub.PrintM();
+	cout << "-------------------------\n";
 
-	cout << "ПРОВЕРКА\nM * обратнаяM = \n";
 	Matrix test;
 	test = M1 * dub;
+	cout << "---------ПРОВЕРКА--------\nM * обратнаяM = \n";
 	test.PrintM();
-	cout << "РАБОТАЕТ ))))))))))))))))))))\n";
-
+	cout << "-------------------------\n";
 }
