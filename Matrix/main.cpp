@@ -1,4 +1,4 @@
-#include <iostream>
+п»ї#include <iostream>
 #include<conio.h>
 
 using namespace std;
@@ -9,8 +9,8 @@ void Print(double** arr, const int rows, const int cols);
 
 class Matrix
 {
-	int rows; //количество строк
-	int cols; //количество столбцов
+	int rows; //РєРѕР»РёС‡РµСЃС‚РІРѕ СЃС‚СЂРѕРє
+	int cols; //РєРѕР»РёС‡РµСЃС‚РІРѕ СЃС‚РѕР»Р±С†РѕРІ
 	double** arr;
 	//bool err;
 public:
@@ -62,7 +62,7 @@ public:
 		for (int i = 0; i < rows; i++)
 			for (int j = 0; j < cols; j++)
 				this->arr[i][j] = other.arr[i][j];
-		cout << "DeepCopy:\t\t" << this << endl; //Побитовое копирование
+		cout << "DeepCopy:\t\t" << this << endl; //РџРѕР±РёС‚РѕРІРѕРµ РєРѕРїРёСЂРѕРІР°РЅРёРµ
 	}
 	~Matrix()
 	{
@@ -95,11 +95,11 @@ public:
 		for (int i = 0; i < this->rows; i++)
 			for (int j = 0; j < this->cols; j++)
 				this->arr[i][j] = other.arr[i][j];
-		cout << "CopyAssignment:\t\t" << this << endl; //Побитовое копирование
+		cout << "CopyAssignment:\t\t" << this << endl; //РџРѕР±РёС‚РѕРІРѕРµ РєРѕРїРёСЂРѕРІР°РЅРёРµ
 	}
 	Matrix operator+ (const Matrix other)
 	{
-		if (this->rows != other.rows || this->cols != other.cols) //невозможно вычислить
+		if (this->rows != other.rows || this->cols != other.cols) //РЅРµРІРѕР·РјРѕР¶РЅРѕ РІС‹С‡РёСЃР»РёС‚СЊ
 		{
 			Matrix result(1, 1);
 			return result;
@@ -120,7 +120,7 @@ public:
 		cout << "operator+ \t\t" << &m3 << endl;
 		return m3;
 	}
-	Matrix& operator*(int value)		//умножение на число
+	Matrix& operator*(int value)		//СѓРјРЅРѕР¶РµРЅРёРµ РЅР° С‡РёСЃР»Рѕ
 	{
 		for (int i = 0; i < rows; i++)
 		{
@@ -143,7 +143,7 @@ public:
 			}
 		}
 	}
-	void PrintM() const			//с именем Print почему-то возникла путаница. Хотя количество аргументов разное, но метод пытался вызвать метод, а не функцию. Пришлось поменять имя метода
+	void PrintM() const			//СЃ РёРјРµРЅРµРј Print РїРѕС‡РµРјСѓ-С‚Рѕ РІРѕР·РЅРёРєР»Р° РїСѓС‚Р°РЅРёС†Р°. РҐРѕС‚СЏ РєРѕР»РёС‡РµСЃС‚РІРѕ Р°СЂРіСѓРјРµРЅС‚РѕРІ СЂР°Р·РЅРѕРµ, РЅРѕ РјРµС‚РѕРґ РїС‹С‚Р°Р»СЃСЏ РІС‹Р·РІР°С‚СЊ РјРµС‚РѕРґ, Р° РЅРµ С„СѓРЅРєС†РёСЋ. РџСЂРёС€Р»РѕСЃСЊ РїРѕРјРµРЅСЏС‚СЊ РёРјСЏ РјРµС‚РѕРґР°
 	{
 		Print(this->arr, this->rows, this->cols);
 	}
@@ -171,7 +171,7 @@ public:
 				ind++;
 			}
 			ind--;
-			if (!first_element) //если весь первый столбец нулевой, обратной матрицы не существует
+			if (!first_element) //РµСЃР»Рё РІРµСЃСЊ РїРµСЂРІС‹Р№ СЃС‚РѕР»Р±РµС† РЅСѓР»РµРІРѕР№, РѕР±СЂР°С‚РЅРѕР№ РјР°С‚СЂРёС†С‹ РЅРµ СЃСѓС‰РµСЃС‚РІСѓРµС‚
 			{
 				for (int i = 0; i < this->rows; i++)
 					delete[] arr[i];
@@ -182,7 +182,7 @@ public:
 				arr[0] = new double[cols] {};
 				return *this;
 			}
-			else  //вот теперь ищем обратную матрицу
+			else  //РІРѕС‚ С‚РµРїРµСЂСЊ РёС‰РµРј РѕР±СЂР°С‚РЅСѓСЋ РјР°С‚СЂРёС†Сѓ
 			{
 				Matrix res(rows, cols);
 				res.to_e();
@@ -190,15 +190,15 @@ public:
 				cout << "res to e\n";
 				res.PrintM();
 
-				for (int i = 0; i < rows; i++)						//ПРЯМОЙ ОБХОД
+				for (int i = 0; i < rows; i++)						//РџР РЇРњРћР™ РћР‘РҐРћР”
 				{
-					if (!arr[i][i])  //если диагональный эл-т = 0, меняем строки местами
+					if (!arr[i][i])  //РµСЃР»Рё РґРёР°РіРѕРЅР°Р»СЊРЅС‹Р№ СЌР»-С‚ = 0, РјРµРЅСЏРµРј СЃС‚СЂРѕРєРё РјРµСЃС‚Р°РјРё
 					{
 						ind = 0;
 						for (int k = i + 1; k < rows; k++)
 						{
 							if (arr[k][i] && !ind)
-								ind = k;						//находим строку, где элемент ненулевой
+								ind = k;						//РЅР°С…РѕРґРёРј СЃС‚СЂРѕРєСѓ, РіРґРµ СЌР»РµРјРµРЅС‚ РЅРµРЅСѓР»РµРІРѕР№
 						}
 						this->ChangeLines(i, ind);
 						res.ChangeLines(i, ind);
@@ -208,7 +208,7 @@ public:
 						res.PrintM();
 					}
 
-					double denominator = arr[i][i];			//приводим диагональный элемент к единице, преобразовывая всю строку
+					double denominator = arr[i][i];			//РїСЂРёРІРѕРґРёРј РґРёР°РіРѕРЅР°Р»СЊРЅС‹Р№ СЌР»РµРјРµРЅС‚ Рє РµРґРёРЅРёС†Рµ, РїСЂРµРѕР±СЂР°Р·РѕРІС‹РІР°СЏ РІСЃСЋ СЃС‚СЂРѕРєСѓ
 					this->DivideLine(i, denominator);
 					res.DivideLine(i, denominator);
 
@@ -230,10 +230,10 @@ public:
 							res.PrintM();
 						}
 					}
-				}  //получили: по диагонали единицы, под диагональю нули
+				}  //РїРѕР»СѓС‡РёР»Рё: РїРѕ РґРёР°РіРѕРЅР°Р»Рё РµРґРёРЅРёС†С‹, РїРѕРґ РґРёР°РіРѕРЅР°Р»СЊСЋ РЅСѓР»Рё
 
 				cout << "\nREVERSE\n";
-				for (int i = rows - 1; i >= 0; i--)				//ОБРАТНЫЙ ОБХОД
+				for (int i = rows - 1; i >= 0; i--)				//РћР‘Р РђРўРќР«Р™ РћР‘РҐРћР”
 				{
 					for (int j = i - 1; j >= 0; j--)
 					{
@@ -248,7 +248,7 @@ public:
 					}
 				}
 
-				//вывод результата
+				//РІС‹РІРѕРґ СЂРµР·СѓР»СЊС‚Р°С‚Р°
 				for (int i = 0; i < rows; i++)
 					for (int j = 0; j < cols; j++)
 						this->arr[i][j] = res.arr[i][j];
@@ -256,7 +256,7 @@ public:
 			}
 		}
 	}
-	Matrix& to_e()	//Записывает единичную матрицу
+	Matrix& to_e()	//Р—Р°РїРёСЃС‹РІР°РµС‚ РµРґРёРЅРёС‡РЅСѓСЋ РјР°С‚СЂРёС†Сѓ
 	{
 		int buf = 0;
 		for (int i = 0; i < rows; i++)
@@ -302,10 +302,10 @@ public:
 	}
 };  // CLass Matrix
 
-Matrix operator*(const Matrix left, const Matrix right) //умножение двух матриц
+Matrix operator*(const Matrix left, const Matrix right) //СѓРјРЅРѕР¶РµРЅРёРµ РґРІСѓС… РјР°С‚СЂРёС†
 {
 
-	if (left.get_cols() != right.get_rows()) // Если не соблюдаются условия по размерности для перемножения
+	if (left.get_cols() != right.get_rows()) // Р•СЃР»Рё РЅРµ СЃРѕР±Р»СЋРґР°СЋС‚СЃСЏ СѓСЃР»РѕРІРёСЏ РїРѕ СЂР°Р·РјРµСЂРЅРѕСЃС‚Рё РґР»СЏ РїРµСЂРµРјРЅРѕР¶РµРЅРёСЏ
 	{
 		Matrix C;
 		return C;
@@ -325,7 +325,7 @@ Matrix operator*(const Matrix left, const Matrix right) //умножение двух матриц
 
 	return C;
 }
-Matrix operator/(const Matrix left, const Matrix right) //деление матриц
+Matrix operator/(const Matrix left, const Matrix right) //РґРµР»РµРЅРёРµ РјР°С‚СЂРёС†
 {
 	Matrix dub, result;
 	dub = right;
@@ -359,7 +359,7 @@ void main()
 {
 	setlocale(LC_ALL, "");
 
-	cout << "\t\tСЛОЖЕНИЕ\n\n";
+	cout << "\t\tРЎР›РћР–Р•РќРР•\n\n";
 
 	Matrix A(4, 3);
 	A.FillRand();
@@ -379,7 +379,7 @@ void main()
 	getch();
 	system("cls");
 
-	cout << "\t\tУМНОЖЕНИЕ НА ЧИСЛО\n\n  A\n";
+	cout << "\t\tРЈРњРќРћР–Р•РќРР• РќРђ Р§РРЎР›Рћ\n\n  A\n";
 	A.PrintM();
 	Matrix D;
 	cout << "  A * 3 =\n";
@@ -388,7 +388,7 @@ void main()
 
 	getch();
 	system("cls");
-	cout << "\t\tУМНОЖЕНИЕ ДВУХ МАТРИЦ\n\n  A\n";
+	cout << "\t\tРЈРњРќРћР–Р•РќРР• Р”Р’РЈРҐ РњРђРўР РР¦\n\n  A\n";
 	Matrix A1(3, 5);
 	A1.FillRand();
 	A1.PrintM();
@@ -402,7 +402,7 @@ void main()
 
 	getch();
 	system("cls");
-	cout << "\t\tОБРАТНАЯ МАТРИЦА\n\n  A\n";
+	cout << "\t\tРћР‘Р РђРўРќРђРЇ РњРђРўР РР¦Рђ\n\n  A\n";
 	Matrix A2(4, 4), DUB(4,4), TEST(4,4);
 	A2.FillRand();
 	A2.get_arr()[0][0] = 0;
@@ -417,14 +417,14 @@ void main()
 	A2.PrintM();
 	cout << "\n----------------\n";
 
-	TEST = DUB * A2;			//контрольная проверка
+	TEST = DUB * A2;			//РєРѕРЅС‚СЂРѕР»СЊРЅР°СЏ РїСЂРѕРІРµСЂРєР°
 	cout << "\n----------------\ntest\n----------------\n";
 	TEST.PrintM();
 	cout << "\n----------------\n";
 
 	getch();
 	system("cls");
-	cout << "\t\tДЕЛЕНИЕ\n\n";
+	cout << "\t\tР”Р•Р›Р•РќРР•\n\n";
 	Matrix A3(4, 4), B3(4, 4), C3 (4, 4);
 	A3.FillRand();
 	B3.FillRand();
