@@ -162,7 +162,7 @@ public:
 		}
 		else
 		{
-			int first_element = 0;
+			double first_element = 0;
 			int ind = 0;
 			while (!first_element && ind < rows)
 			{
@@ -271,7 +271,7 @@ public:
 	}
 	Matrix& ChangeLines(int first, int second)
 	{
-		int buf = 0;
+		double buf = 0;
 		for (int i = 0; i < cols; i++)
 		{
 			buf = arr[first][i];

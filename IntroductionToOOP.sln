@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.26228.86
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36203.30 d17.14
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "IntroductionToOOP", "IntroductionToOOP\IntroductionToOOP.vcxproj", "{327890DC-6CE9-4751-9547-2AFC2D9537D8}"
 EndProject
@@ -16,6 +16,8 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "StringHW", "StringHW\StringHW.vcxproj", "{B1C2D79E-6084-45A2-91C1-FB10AD762054}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Matrix", "Matrix\Matrix.vcxproj", "{B09BF888-BDD5-4733-BCF4-FCDFF401D1C0}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MatrixOfFractions", "MatrixOfFractions\MatrixOfFractions.vcxproj", "{3E4EFA4F-DAC2-4667-AED0-38190E18DEBE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -81,6 +83,14 @@ Global
 		{B09BF888-BDD5-4733-BCF4-FCDFF401D1C0}.Release|x64.Build.0 = Release|x64
 		{B09BF888-BDD5-4733-BCF4-FCDFF401D1C0}.Release|x86.ActiveCfg = Release|Win32
 		{B09BF888-BDD5-4733-BCF4-FCDFF401D1C0}.Release|x86.Build.0 = Release|Win32
+		{3E4EFA4F-DAC2-4667-AED0-38190E18DEBE}.Debug|x64.ActiveCfg = Debug|x64
+		{3E4EFA4F-DAC2-4667-AED0-38190E18DEBE}.Debug|x64.Build.0 = Debug|x64
+		{3E4EFA4F-DAC2-4667-AED0-38190E18DEBE}.Debug|x86.ActiveCfg = Debug|Win32
+		{3E4EFA4F-DAC2-4667-AED0-38190E18DEBE}.Debug|x86.Build.0 = Debug|Win32
+		{3E4EFA4F-DAC2-4667-AED0-38190E18DEBE}.Release|x64.ActiveCfg = Release|x64
+		{3E4EFA4F-DAC2-4667-AED0-38190E18DEBE}.Release|x64.Build.0 = Release|x64
+		{3E4EFA4F-DAC2-4667-AED0-38190E18DEBE}.Release|x86.ActiveCfg = Release|Win32
+		{3E4EFA4F-DAC2-4667-AED0-38190E18DEBE}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
