@@ -2,6 +2,7 @@
 #include <iostream>
 using namespace std;
 #define delimiter "\n----------------------------------\n"
+#define DEBUG
 
 class String
 {
@@ -25,7 +26,9 @@ public:
 	{
 		this->size = size;
 		this->str = new char[size] {};
+#ifdef DEBUG
 		cout << "DefaultConstruction\t" << this << endl;
+#endif // DEBUG
 	}
 	String(const char str[])
 	{
@@ -34,7 +37,11 @@ public:
 		this->str = new char[size] {};
 		for (int i = 0; str[i]; i++)
 			this->str[i] = str[i];
+#ifdef DEBUG
+
+
 		cout << "Constructor:\t\t" << this << endl;
+#endif // DEBUG
 	}
 	String(const String& other)
 	{
@@ -42,7 +49,11 @@ public:
 		this->str = new char[size] {0};
 		for (int i = 0; i < size; i++)
 			this->str[i] = other.str[i];
+#ifdef DEBUG
+
+
 		cout << "DeepCopy:\t\t" << this << endl; //Побитовое копирование
+#endif // DEBUG
 	}
 	String(String&& other)
 	{
@@ -50,14 +61,22 @@ public:
 		this->str = other.str;
 		other.size = 0;
 		other.str = nullptr;//защищаем памят от удаления деструктором
+
+
+#ifdef DEBUG
 		cout << "MoveConstructor:\t" << this << endl;
+#endif // DEBUG
 	}
 	~String()
 	{
 		delete[] str;
 		this->str = nullptr;
 		this->size = 0;
+
+
+#ifdef DEBUG
 		cout << "Destructor\t\t" << this << endl;
+#endif // DEBUG
 	}
 	//		Operators
 	String& operator= (const String& other)
@@ -69,7 +88,11 @@ public:
 		this->str = new char[size] {0};
 		for (int i = 0; i < size; i++)
 			this->str[i] = other.str[i];
+
+
+#ifdef DEBUG
 		cout << "CopyAssignment:\t\t" << this << endl; //Побитовое копирование
+#endif // DEBUG
 		return *this;
 	}
 	String& operator=(String&& other)
@@ -80,7 +103,11 @@ public:
 		this->str = other.str;
 		other.size = 0;
 		other.str = nullptr;
+
+
+#ifdef DEBUG
 		cout << "MoveAssignment:\t\t" << this << endl;
+#endif // DEBUG
 		return *this;
 	}
 	char operator[] (int i) const
@@ -106,7 +133,11 @@ String operator+(const String& left, const String& right)
 		result[i] = left[i];
 	for (int i = 0; right[i]; i++)
 		result[left.get_size() - 1 + i] = right[i];
+
+
+#ifdef DEBUG
 	cout << "Operator+\n";
+#endif // DEBUG
 	return result;
 }
 
@@ -173,5 +204,28 @@ void main()
 	cout << str << endl;
 #endif // ISTREAM_OPERATOR
 
+	String str1; //default Constructor
+	str1.info();
+
+	String str2(8); //single-argument constructor
+	str2.info();
+
+	String str3 = "Hello"; // single-argument constyructor (const char*)
+	str3.info();
+
+	cout << typeid("Hello").name() << endl;
+
+	String str4(); // не вызывается никакой конструктор и не создается никакой объект,
+					//здесь происходит объявление функции str4, которая ничего не принимает
+					//и возвращает объект типа String
+	//ВЫВОД - пустые куглые скобки не вызывают конструктор. Не делают явный вызов конструктора
+	//ЕСЛИ нужно явно вызвать Default constructor, это можно сделать с {}
+
+	String str5(8);		//инициализация в стиле с++
+	String str6{ 8 };	//тоже создается строка длиной 8 байт, т.е. {} вызывают конструктор
+	String str7{};		//явный вызов конструтора по умолчанию
+	// !!!!!!!!!!!     {}    СЛЕДУЕТ ИСПОЛЬЗОВАТЬ С ОСТОРОЖНОСТЬЮ           !!!!!!!!!!
+
+	String str9 = str3;	//конструктор копирования
 
 }
