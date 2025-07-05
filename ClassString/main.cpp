@@ -5,6 +5,19 @@ using std::cin;
 #define delimiter "\n----------------------------------\n"
 #define DEBUG
 
+
+
+/// /////////////// Объяыление класса. Class declaration ////////////////////////////////
+
+
+/// <summary>
+/// -----------------------------------------------------------------///
+///				Определение класса. Class Definition
+/// </summary>
+
+class String;
+String operator+(const String& left, const String& right);
+
 class String
 {
 	int size;
@@ -24,12 +37,19 @@ public:
 	//		Operators
 	String& operator= (const String& other);
 	String& operator=(String&& other);
+
+	String& operator+=(const String other);
+
 	char operator[] (int i) const;
 	char& operator[] (int i);
 	
 	//		Metods
 	void info() const;
 };
+
+/// /////////////// Конец. Объявление класса. Class declaration. END ////////////////////////////////
+
+
 int String::get_size() const
 {
 	return size;
@@ -111,6 +131,10 @@ String& String::operator=(String&& other)
 #endif // DEBUG
 	return *this;
 }
+String& String::operator+=(const String other)
+{
+	return *this = *this + other;
+}
 char String::operator[] (int i) const
 {
 	return str[i];
@@ -159,6 +183,9 @@ std::istream& getline(std::istream& cin, String& obj)
 	cin.getline(obj.get_str(), obj.get_size());
 	return cin;
 }
+
+/// -----------------------------------------------------------------///
+///			КОНЕЦ.	Определение класса. Class Definition END
 
 #define OPRATOR_PLUS
 //#define CONSTRUCTORS_CHECK
