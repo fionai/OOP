@@ -24,41 +24,28 @@ public:
 	//		constructors
 	explicit String(int size = 80) :size(size), str(new char[this->size] {})
 	{
-		//this->size = size;
-		//this->str = new char[size] {};
 #ifdef DEBUG
 		cout << "DefaultConstruction\t" << this << endl;
 #endif // DEBUG
 	}
-String(const char str[]) :size(strlen(str) + 1), str(new char[size] {})
+String(const char str[]) :String(strlen(str) + 1)
 	{
-		//size = 0;
-		//while (str[size++]);
-		//this->str = new char[size] {};
 		for (int i = 0; str[i]; i++)
 			this->str[i] = str[i];
 #ifdef DEBUG
 		cout << "Constructor:\t\t" << this << endl;
 #endif // DEBUG
 	}
-	String(const String& other):size(other.size), str(new char[size] {})
+	String(const String& other) :String(other.str)
 	{
-		//this->size = other.size;
-		//this->str = new char[size] {0};
-		for (int i = 0; i < size; i++)
-			this->str[i] = other.str[i];
 #ifdef DEBUG
 		cout << "DeepCopy:\t\t" << this << endl; //Побитовое копирование
 #endif // DEBUG
 	}
 	String(String&& other) :size(other.size), str(other.str)
 	{
-		//this->size = other.size;
-		//this->str = other.str;
 		other.size = 0;
 		other.str = nullptr;//защищаем памят от удаления деструктором
-
-
 #ifdef DEBUG
 		cout << "MoveConstructor:\t" << this << endl;
 #endif // DEBUG
@@ -187,6 +174,8 @@ void main()
 	str3 = str1 + str2;
 	cout << delimiter << endl;
 	cout << str3 << endl;
+	String str4 = str3;
+	cout << str4 << endl;
 #endif // OPRATOR_PLUS
 
 #ifdef ISTREAM_OPERATOR
