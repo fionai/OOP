@@ -22,43 +22,39 @@ public:
 		return str;
 	}
 	//		constructors
-	explicit String(int size = 80)
+	explicit String(int size = 80) :size(size), str(new char[this->size] {})
 	{
-		this->size = size;
-		this->str = new char[size] {};
+		//this->size = size;
+		//this->str = new char[size] {};
 #ifdef DEBUG
 		cout << "DefaultConstruction\t" << this << endl;
 #endif // DEBUG
 	}
-	String(const char str[])
+String(const char str[]) :size(strlen(str) + 1), str(new char[size] {})
 	{
-		size = 0;
-		while (str[size++]);
-		this->str = new char[size] {};
+		//size = 0;
+		//while (str[size++]);
+		//this->str = new char[size] {};
 		for (int i = 0; str[i]; i++)
 			this->str[i] = str[i];
 #ifdef DEBUG
-
-
 		cout << "Constructor:\t\t" << this << endl;
 #endif // DEBUG
 	}
-	String(const String& other)
+	String(const String& other):size(other.size), str(new char[size] {})
 	{
-		this->size = other.size;
-		this->str = new char[size] {0};
+		//this->size = other.size;
+		//this->str = new char[size] {0};
 		for (int i = 0; i < size; i++)
 			this->str[i] = other.str[i];
 #ifdef DEBUG
-
-
 		cout << "DeepCopy:\t\t" << this << endl; //Побитовое копирование
 #endif // DEBUG
 	}
-	String(String&& other)
+	String(String&& other) :size(other.size), str(other.str)
 	{
-		this->size = other.size;
-		this->str = other.str;
+		//this->size = other.size;
+		//this->str = other.str;
 		other.size = 0;
 		other.str = nullptr;//защищаем памят от удаления деструктором
 
@@ -88,8 +84,6 @@ public:
 		this->str = new char[size] {0};
 		for (int i = 0; i < size; i++)
 			this->str[i] = other.str[i];
-
-
 #ifdef DEBUG
 		cout << "CopyAssignment:\t\t" << this << endl; //Побитовое копирование
 #endif // DEBUG
@@ -160,9 +154,11 @@ std::istream& getline(std::istream& cin, String& obj)
 	return cin;
 }
 
-//#define OPRATOR_PLUS
+#define OPRATOR_PLUS
 //#define CONSTRUCTORS_CHECK
 //#define ISTREAM_OPERATOR
+//#define PERFORMANCE_TEST
+//#define CALLING_CONSTRUCTORS
 
 void main()
 {
@@ -204,6 +200,7 @@ void main()
 	cout << str << endl;
 #endif // ISTREAM_OPERATOR
 
+#ifdef CALLING_CONSTRUCTORS
 	String str1; //default Constructor
 	str1.info();
 
@@ -216,16 +213,18 @@ void main()
 	cout << typeid("Hello").name() << endl;
 
 	String str4(); // не вызывается никакой конструктор и не создается никакой объект,
-					//здесь происходит объявление функции str4, которая ничего не принимает
-					//и возвращает объект типа String
-	//ВЫВОД - пустые куглые скобки не вызывают конструктор. Не делают явный вызов конструктора
-	//ЕСЛИ нужно явно вызвать Default constructor, это можно сделать с {}
+	//здесь происходит объявление функции str4, которая ничего не принимает
+	//и возвращает объект типа String
+//ВЫВОД - пустые куглые скобки не вызывают конструктор. Не делают явный вызов конструктора
+//ЕСЛИ нужно явно вызвать Default constructor, это можно сделать с {}
 
 	String str5(8);		//инициализация в стиле с++
 	String str6{ 8 };	//тоже создается строка длиной 8 байт, т.е. {} вызывают конструктор
 	String str7{};		//явный вызов конструтора по умолчанию
 	// !!!!!!!!!!!     {}    СЛЕДУЕТ ИСПОЛЬЗОВАТЬ С ОСТОРОЖНОСТЬЮ           !!!!!!!!!!
 
-	String str9 = str3;	//конструктор копирования
+	String str9 = str3;	//конструктор копирования  
+#endif // CALLING_CONSTRUCTORS
+
 
 }
