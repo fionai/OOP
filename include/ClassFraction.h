@@ -38,10 +38,10 @@ public:
 
 	//				contructions
 	Fraction();
-	Fraction(int integer);
-	Fraction(int numerator, int denominator);
-	Fraction(double decimal);
 	Fraction(int integer, int numerator, int denominator);
+	Fraction(int numerator, int denominator);
+	Fraction(int integer);
+	Fraction(double decimal);
 	Fraction(const Fraction& other);
 	~Fraction();
 

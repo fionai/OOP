@@ -175,4 +175,7 @@ void main()
 
 	Fraction A = 2.76;
 	cout << A << endl;
+
+	Fraction B(2, 3, 5);
+	B.print();
 }

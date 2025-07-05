@@ -3,6 +3,6 @@
 void main()
 {
 	setlocale(LC_ALL, "");
-	Fraction F1 = (2, 3, 5);
+	Fraction F1 (2, 3, 5);
 	F1.print();
 }
