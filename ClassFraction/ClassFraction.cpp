@@ -198,7 +198,6 @@ void Fraction::print()const
 		if (integer) cout << ")";
 	}
 	else if (!integer) cout << 0;
-	cout << endl;
 }
 
 //============= up IN CLASS up ===============
