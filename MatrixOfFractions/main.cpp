@@ -410,15 +410,15 @@ void main()
 	// пройти ТЕСТ с обратной					- OK!!!!!!!!!!!!!!!!!!
 	// достаточно
 
-	Fraction F1(0, 0, 1);
-	F1.to_proper();
-	F1.Reduce();
-	F1.print();
+	//Fraction F1(0, 0, 1);
+	//F1.to_proper();
+	//F1.Reduce();
+	//F1.print();
 
-	//Matrix M1(3, 3);
-	//M1.FillRand();
-	//cout << "  M1\n";
-	//M1.PrintM();
+	Matrix M1(3, 3);
+	M1.FillRand();
+	cout << "  M1\n";
+	M1.PrintM();
 
 	/*Matrix M2 = M1;
 	cout << "  M2\n";
