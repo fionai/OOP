@@ -1,7 +1,6 @@
 ﻿#include<ClassFraction.h>
 
 class Matrix;
-//void FillRand(double** arr, const int rows, const int cols);
 void Print(Fraction** arr, const int rows, const int cols);
 
 
@@ -411,12 +410,14 @@ void main()
 	// пройти ТЕСТ с обратной					- OK!!!!!!!!!!!!!!!!!!
 	// достаточно
 
-	
+	Fraction F1(8, 5);
+	F1.to_proper();
+	F1.print();
 
-	Matrix M1(3, 3);
-	M1.FillRand();
-	cout << "  M1\n";
-	M1.PrintM();
+	//Matrix M1(3, 3);
+	//M1.FillRand();
+	//cout << "  M1\n";
+	//M1.PrintM();
 
 	/*Matrix M2 = M1;
 	cout << "  M2\n";
