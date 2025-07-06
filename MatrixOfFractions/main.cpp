@@ -1,10 +1,7 @@
-﻿//#define _CRT_SECURE_NO_WARNINGS
-#include<iostream>
-using namespace std;
-#include<ClassFraction.h>
+﻿#include<ClassFraction.h>
 
 class Matrix;
-void FillRand(double** arr, const int rows, const int cols);
+//void FillRand(double** arr, const int rows, const int cols);
 void Print(Fraction** arr, const int rows, const int cols);
 
 
