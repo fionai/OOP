@@ -39,12 +39,12 @@ Fraction::Fraction()
 	this->denominator = 1;
 	//cout << "Default construction:\t" << this << endl;
 }
-Fraction::Fraction(int integer, int numerator, int denominator)
+Fraction::Fraction(int integer)
 {
-	set_integer(integer);
-	set_numerator(numerator);
-	set_denominator(denominator);
-	//cout << "Constructor: \t\t" << this << endl;
+	this->integer = integer;
+	this->numerator = 0;
+	this->denominator = 1;
+	//cout << "Constructor:\t\t" << this << endl;
 }
 Fraction::Fraction(int numerator, int denominator)
 {
@@ -52,13 +52,6 @@ Fraction::Fraction(int numerator, int denominator)
 	this->numerator = numerator;
 	this->denominator = denominator;
 	//cout << "Construction:\t\t" << this << endl;
-}
-Fraction::Fraction(int integer)
-{
-	this->integer = integer;
-	this->numerator = 0;
-	this->denominator = 1;
-	//cout << "Constructor:\t\t" << this << endl;
 }
 Fraction::Fraction(double decimal)
 {
@@ -68,6 +61,13 @@ Fraction::Fraction(double decimal)
 	denominator = 1e+9;
 	numerator = decimal * denominator;
 	Reduce();
+}
+Fraction::Fraction(int integer, int numerator, int denominator)
+{
+	set_integer(integer);
+	set_numerator(numerator);
+	set_denominator(denominator);
+	//cout << "Constructor: \t\t" << this << endl;
 }
 Fraction::Fraction(const Fraction& other)
 {
