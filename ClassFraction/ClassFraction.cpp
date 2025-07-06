@@ -41,9 +41,9 @@ Fraction::Fraction()
 }
 Fraction::Fraction(int integer, int numerator, int denominator)
 {
-	set_integer(integer);
-	set_numerator(numerator);
-	set_denominator(denominator);
+	this->integer = integer;
+	this->numerator = numerator;
+	this->denominator = denominator;
 	//cout << "Constructor: \t\t" << this << endl;
 }
 Fraction::Fraction(int numerator, int denominator)
@@ -130,10 +130,14 @@ Fraction Fraction::operator-- (int)
 //Type-cast operastors
 Fraction::operator int() const
 {
+	if (!denominator)
+		return Fraction(0, 0, 1);
 	return integer + numerator / denominator;
 }
 Fraction::operator double() const
 {
+	if (!denominator)
+		return Fraction(0, 0, 1);
 	return integer + (double)numerator / denominator;
 }
 //				Methods
@@ -146,6 +150,8 @@ Fraction& Fraction::to_improper() //переводит дробь в неправильную
 Fraction& Fraction::Reduce()
 {
 	int more, less, rest;
+	if (!numerator || !denominator)
+		return *this;
 	if (numerator < denominator)
 	{
 		less = numerator;
@@ -168,6 +174,9 @@ Fraction& Fraction::Reduce()
 }
 Fraction& Fraction::to_proper()
 {
+	Fraction tmp (0, 0, 1);
+	if (!denominator)
+		return tmp;
 	integer += numerator / denominator;
 	numerator %= denominator;
 	return *this;
@@ -276,11 +285,6 @@ std::ostream& operator<< (std::ostream& os, Fraction& obj)
 }
 std::istream& operator>> (std::istream& is, Fraction& obj)
 {
-	/*int integer, numerator, denominator;
-	is >> integer >> numerator >> denominator;
-	obj.set_integer(integer);
-	obj.set_numerator(numerator);
-	obj.set_denominator(denominator);*/
 
 	const int SIZE = 32;
 	char sz_input[SIZE] = {};

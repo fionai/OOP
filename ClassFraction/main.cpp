@@ -173,9 +173,9 @@ void main()
 	cout << b << endl;
 #endif // CONVERTION_FROM_CLASS_TO_OTHER
 
-	Fraction A = 2.76;
+	Fraction A (2, 3, 5);
 	cout << A << endl;
 
-	Fraction B(2, 3, 5);
-	B.print();
+	Fraction B (3, 5);
+	cout << B << endl;
 }
