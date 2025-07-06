@@ -4,7 +4,7 @@ class Matrix;
 void Print(Fraction** arr, const int rows, const int cols);
 
 
-class Matrix
+class Matrix 
 {
 	int rows; //количество строк
 	int cols; //количество столбцов
