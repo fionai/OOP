@@ -8,7 +8,6 @@ Fraction operator* (Fraction left, Fraction right);
 Fraction operator/ (const Fraction left, const Fraction right);
 Fraction operator+ (Fraction left, Fraction right);
 Fraction operator- (const Fraction left, const Fraction right);
-void FillRand(double** arr, const int rows, const int cols);
 void Print(Fraction** arr, const int rows, const int cols);
 bool operator== (Fraction left, Fraction right);
 bool operator!= (const Fraction left, const Fraction right);
