@@ -24,22 +24,16 @@ public:
 		return arr;
 	}
 	//		constructors
-	Matrix(int rows = 1, int cols = 1)							// default or measurements
+	Matrix(int rows = 1, int cols = 1):rows(rows), cols(cols), arr(new Fraction* [this->rows] {})
+		// default or measurements
 	{
-		this->rows = rows;
-		this->cols = cols;
-		//err = 0;
-		this->arr = new Fraction* [rows] {};
 		for (int i = 0; i < rows; i++)
 			this->arr[i] = new Fraction[cols] {};
 		cout << "DefaultConstruction\t" << this << endl;
 	}
-	Matrix(Fraction** arr, const   int rows, const   int cols)		//array and measurements
+	Matrix(Fraction** arr, const   int rows, const   int cols):rows(rows), cols(cols), arr(new Fraction* [this->rows] {})
+		//array and measurements
 	{
-		this->rows = rows;
-		this->cols = cols;
-		//this->err = 0;
-		this->arr = new Fraction* [rows] {};
 		for (int i = 0; i < rows; i++)
 			this->arr[i] = new Fraction[cols] {};
 		for (int i = 0; i < rows; i++)
@@ -47,12 +41,9 @@ public:
 				this->arr[i][j] = arr[i][j];
 		cout << "array and measurements\t" << this << endl;
 	}
-	Matrix(const Matrix& other)									//Matrix
+	Matrix(const Matrix& other):rows(other.rows), cols(other.cols), arr(new Fraction* [this->rows]{})
+		//Matrix
 	{
-		this->rows = other.rows;
-		this->cols = other.cols;
-		//this->err = 0;
-		this->arr = new Fraction* [rows] {};
 		for (int i = 0; i < rows; i++)
 			this->arr[i] = new Fraction[cols] {};
 
@@ -415,7 +406,7 @@ void main()
 	//F1.Reduce();
 	//F1.print();
 
-	Matrix M1(3, 3);
+	Matrix M1(4, 4);
 	M1.FillRand();
 	cout << "  M1\n";
 	M1.PrintM();
