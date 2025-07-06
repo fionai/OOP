@@ -1,6 +1,7 @@
-﻿#define _CRT_SECURE_NO_WARNINGS
+﻿//#define _CRT_SECURE_NO_WARNINGS
 #include<iostream>
 using namespace std;
+#include<ClassFraction.h>
 
 class Matrix;
 void FillRand(double** arr, const int rows, const int cols);
@@ -32,7 +33,7 @@ public:
 		this->rows = rows;
 		this->cols = cols;
 		//err = 0;
-		this->arr = new Fraction * [rows] {};
+		this->arr = new Fraction* [rows] {};
 		for (int i = 0; i < rows; i++)
 			this->arr[i] = new Fraction[cols] {};
 		cout << "DefaultConstruction\t" << this << endl;
@@ -413,12 +414,13 @@ void main()
 	// пройти ТЕСТ с обратной					- OK!!!!!!!!!!!!!!!!!!
 	// достаточно
 
-	Matrix M1(4, 4);
+
+	Matrix M1(3, 3);
 	M1.FillRand();
 	cout << "  M1\n";
 	M1.PrintM();
 
-	Matrix M2 = M1;
+	/*Matrix M2 = M1;
 	cout << "  M2\n";
 	M2.PrintM();
 
@@ -467,5 +469,5 @@ void main()
 	test = M1 * dub;
 	cout << "---------ПРОВЕРКА--------\nM * обратнаяM = \n";
 	test.PrintM();
-	cout << "-------------------------\n";
+	cout << "-------------------------\n";*/
 }
