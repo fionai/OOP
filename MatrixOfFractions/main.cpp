@@ -410,8 +410,9 @@ void main()
 	// пройти ТЕСТ с обратной					- OK!!!!!!!!!!!!!!!!!!
 	// достаточно
 
-	Fraction F1(8, 5);
+	Fraction F1(0, 0, 1);
 	F1.to_proper();
+	F1.Reduce();
 	F1.print();
 
 	//Matrix M1(3, 3);
