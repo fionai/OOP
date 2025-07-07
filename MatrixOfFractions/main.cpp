@@ -411,11 +411,7 @@ void main()
 	cout << "  M1\n";
 	M1.PrintM();
 
-	Matrix M2(M1);
-	cout << "   M2\n";
-	M2.PrintM();
-
-	/*Matrix M2 = M1;
+	Matrix M2 = M1;
 	cout << "  M2\n";
 	M2.PrintM();
 
@@ -464,5 +460,5 @@ void main()
 	test = M1 * dub;
 	cout << "---------ПРОВЕРКА--------\nM * обратнаяM = \n";
 	test.PrintM();
-	cout << "-------------------------\n";*/
+	cout << "-------------------------\n";
 }
