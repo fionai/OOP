@@ -147,7 +147,7 @@ public:
 	}
 	Matrix& Inverse()
 	{
-		Fraction tmp_zero = 0;
+		Fraction tmp_zero (0, 0, 1);
 		if (rows != cols)
 		{
 			for (int i = 0; i < this->rows; i++)
@@ -298,10 +298,10 @@ public:
 	}
 	Matrix& DivideLine(int line_num, Fraction value)
 	{
-		Fraction tmp_zero = 0;
+		Fraction tmp_zero(0, 0, 1);
 		if (value!=tmp_zero)
 		{
-			Fraction tmp_one = 1;
+			Fraction tmp_one (1, 0, 1);
 			this->MultiplyLine(line_num, (tmp_one / value));
 		}
 		return *this;
@@ -411,7 +411,7 @@ void main()
 	cout << "  M1\n";
 	M1.PrintM();
 
-	Matrix M2 = M1;
+	/*Matrix M2 = M1;
 	cout << "  M2\n";
 	M2.PrintM();
 
@@ -446,7 +446,7 @@ void main()
 	cout << "  M2\n";
 	N2.PrintM();
 	cout << "  M1 * M2 =\n";
-	N3.PrintM();
+	N3.PrintM();*/
 
 	Matrix dub = M1;
 	cout << "\n\nНАЙТИ ОБРАТНУЮ МАТРИЦУ\n  M1\n";
