@@ -156,7 +156,7 @@ public:
 	}
 	Matrix& Inverse()
 	{
-		Fraction tmp_zero = 0;
+		Fraction tmp_zero(0, 0, 1);
 		if (rows != cols)
 		{
 			for (int i = 0; i < this->rows; i++)
@@ -170,7 +170,7 @@ public:
 		}
 		else
 		{
-			Fraction first_element = 0;
+			Fraction first_element(0, 0, 1);
 			int ind = 0;
 			while (first_element==tmp_zero && ind < rows)
 			{
@@ -286,7 +286,7 @@ public:
 	}
 	Matrix& ChangeLines(int first, int second)
 	{
-		Fraction buf = 0;
+		Fraction buf(0, 0, 1);
 		for (int i = 0; i < cols; i++)
 		{
 			buf = arr[first][i];
@@ -307,15 +307,15 @@ public:
 	}
 	Matrix& DivideLine(int line_num, Fraction value)
 	{
-		Fraction tmp_zero = 0;
+		Fraction tmp_zero(0, 0, 1);
 		if (value!=tmp_zero)
 		{
-			Fraction tmp_one = 1;
+			Fraction tmp_one(1, 0, 1);
 			this->MultiplyLine(line_num, (tmp_one / value));
 		}
 		return *this;
 	}
-	Matrix& Subtraction(int minued, int subtrahend, Fraction value = 1)   // line minued - line subtrahend * value
+	Matrix& Subtraction(int minued, int subtrahend, Fraction value )   // line minued - line subtrahend * value
 	{
 		for (int i = 0; i < cols; i++)
 		{
