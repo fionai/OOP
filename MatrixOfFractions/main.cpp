@@ -415,12 +415,12 @@ void main()
 	//F1.Reduce();
 	//F1.print();
 
-	Matrix M1(3, 3);
+	Matrix M1(4, 4);
 	M1.FillRand();
 	cout << "  M1\n";
 	M1.PrintM();
 
-	/*Matrix M2 = M1;
+	Matrix M2 = M1;
 	cout << "  M2\n";
 	M2.PrintM();
 
@@ -469,5 +469,5 @@ void main()
 	test = M1 * dub;
 	cout << "---------ПРОВЕРКА--------\nM * обратнаяM = \n";
 	test.PrintM();
-	cout << "-------------------------\n";*/
+	cout << "-------------------------\n";
 }
