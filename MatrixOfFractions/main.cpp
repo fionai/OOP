@@ -31,25 +31,25 @@ public:
 			this->arr[i] = new Fraction[cols] {};
 		cout << "DefaultConstruction\t" << this << endl;
 	}
-	Matrix(Fraction** arr, const   int rows, const   int cols):rows(rows), cols(cols), arr(new Fraction* [this->rows] {})
+	Matrix(Fraction** arr, const   int rows, const   int cols):Matrix(rows, cols) //:rows(rows), cols(cols), arr(new Fraction* [this->rows] {})
 		//array and measurements
 	{
-		for (int i = 0; i < rows; i++)
-			this->arr[i] = new Fraction[cols] {};
+		//for (int i = 0; i < rows; i++)
+		//	this->arr[i] = new Fraction[cols] {};
 		for (int i = 0; i < rows; i++)
 			for (int j = 0; j < cols; j++)
 				this->arr[i][j] = arr[i][j];
 		cout << "array and measurements\t" << this << endl;
 	}
-	Matrix(const Matrix& other):rows(other.rows), cols(other.cols), arr(new Fraction* [this->rows]{})
+	Matrix(const Matrix& other):Matrix(other.arr, other.rows, other.cols)   //:rows(other.rows), cols(other.cols), arr(new Fraction* [this->rows]{})
 		//Matrix
 	{
-		for (int i = 0; i < rows; i++)
-			this->arr[i] = new Fraction[cols] {};
-
-		for (int i = 0; i < rows; i++)
-			for (int j = 0; j < cols; j++)
-				this->arr[i][j] = other.arr[i][j];
+		//for (int i = 0; i < rows; i++)
+		//	this->arr[i] = new Fraction[cols] {};
+		//
+		//for (int i = 0; i < rows; i++)
+		//	for (int j = 0; j < cols; j++)
+		//		this->arr[i][j] = other.arr[i][j];
 		cout << "DeepCopy:\t\t" << this << endl; //Побитовое копирование
 	}
 	~Matrix()
@@ -410,6 +410,10 @@ void main()
 	M1.FillRand();
 	cout << "  M1\n";
 	M1.PrintM();
+
+	Matrix M2(M1);
+	cout << "   M2\n";
+	M2.PrintM();
 
 	/*Matrix M2 = M1;
 	cout << "  M2\n";
