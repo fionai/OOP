@@ -4,7 +4,7 @@
 
 // ================================= CLASS DEFINITION. Определение класса =====================
 
-int Fraction::get_integer() const
+long long int Fraction::get_integer() const
 {
 	return integer;
 }
