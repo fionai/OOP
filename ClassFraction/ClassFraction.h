@@ -23,24 +23,24 @@ std::istream& operator>> (std::istream& is, Fraction& obj);
 
 class Fraction
 {
-	int integer;
-	int numerator;
-	int denominator;
+	long long int integer;
+	long long int numerator;
+	long long int denominator;
 
 public:
-	int get_integer() const;
-	int get_numerator() const;
-	int get_denominator() const;
+	long long int get_integer() const;
+	long long int get_numerator() const;
+	long long int get_denominator() const;
 
-	void set_integer(int integer);
-	void set_numerator(int numerator);
-	void set_denominator(int denominator);
+	void set_integer(long long int integer);
+	void set_numerator(long long int numerator);
+	void set_denominator(long long int denominator);
 
 	//				contructions
 	Fraction();
-	Fraction(int integer, int numerator, int denominator);
-	Fraction(int numerator, int denominator);
-	Fraction(int integer);
+	Fraction(long long int integer, long long int numerator, long long int denominator);
+	Fraction(long long int numerator, long long int denominator);
+	Fraction(long long int integer);
 	Fraction(double decimal);
 	Fraction(const Fraction& other);
 	~Fraction();

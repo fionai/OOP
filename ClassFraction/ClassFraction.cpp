@@ -8,24 +8,24 @@ long long int Fraction::get_integer() const
 {
 	return integer;
 }
-int Fraction::get_numerator() const
+long long int Fraction::get_numerator() const
 {
 	return numerator;
 }
-int Fraction::get_denominator() const
+long long int Fraction::get_denominator() const
 {
 	return denominator;
 }
 
-void Fraction::set_integer(int integer)
+void Fraction::set_integer(long long int integer)
 {
 	this->integer = integer;
 }
-void Fraction::set_numerator(int numerator)
+void Fraction::set_numerator(long long int numerator)
 {
 	this->numerator = numerator;
 }
-void Fraction::set_denominator(int denominator)
+void Fraction::set_denominator(long long int denominator)
 {
 	if (denominator == 0) denominator = 1;
 	this->denominator = denominator;
@@ -39,21 +39,21 @@ Fraction::Fraction()
 	this->denominator = 1;
 	//cout << "Default construction:\t" << this << endl;
 }
-Fraction::Fraction(int integer, int numerator, int denominator)
+Fraction::Fraction(long long int integer, long long int numerator, long long int denominator)
 {
 	this->integer = integer;
 	this->numerator = numerator;
 	this->denominator = denominator;
 	//cout << "Constructor: \t\t" << this << endl;
 }
-Fraction::Fraction(int numerator, int denominator)
+Fraction::Fraction(long long int numerator, long long int denominator)
 {
 	this->integer = 0;
 	this->numerator = numerator;
 	this->denominator = denominator;
 	//cout << "Construction:\t\t" << this << endl;
 }
-Fraction::Fraction(int integer)
+Fraction::Fraction(long long int integer)
 {
 	this->integer = integer;
 	this->numerator = 0;
@@ -119,12 +119,13 @@ Fraction Fraction::operator++ (int)
 }
 Fraction& Fraction::operator--()
 {
-	return *this = *this - Fraction(1);
+	Fraction F1(1, 0, 1);
+	return *this = *this - F1;
 }
 Fraction Fraction::operator-- (int)
 {
-	Fraction old = *this;
-	*this = *this - Fraction(1);
+	Fraction old = *this, F1(1, 0, 1);
+	*this = *this - F1;
 	return old;
 }
 //Type-cast operastors
@@ -149,7 +150,7 @@ Fraction& Fraction::to_improper() //переводит дробь в неправильную
 }
 Fraction& Fraction::Reduce()
 {
-	int more, less, rest;
+	long long int more, less, rest;
 	if (!numerator || !denominator)
 		return *this;
 	if (numerator < denominator)
@@ -297,7 +298,7 @@ std::istream& operator>> (std::istream& is, Fraction& obj)
 
 	switch (n)
 	{
-	case 1:obj = numbers[0]; break;
+	case 1:obj = Fraction(numbers[0], 0, 1); break;
 	case 2:obj = Fraction(numbers[0], numbers[1]); break;
 	case 3:obj = Fraction(numbers[0], numbers[1], numbers[2]); break;
 	}
