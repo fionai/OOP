@@ -14,7 +14,7 @@ void Print(double** arr, const int rows, const int cols);
 class Matrix
 {
 	int rows; //количество строк
-	int cols; //количество столбцов
+	int cols; //количество столбцов 
 	double** arr;
 
 public:
