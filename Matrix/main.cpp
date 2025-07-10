@@ -27,38 +27,24 @@ public:
 		return arr;
 	}
 	//		constructors
-	Matrix(int rows = 1, int cols = 1)							// default or measurements
+	Matrix(int rows = 1, int cols = 1) :rows(rows), cols(cols), arr(new double* [this->rows] {})
+		// default or measurements
 	{
-		this->rows = rows;
-		this->cols = cols;
-		//err = 0;
-		this->arr = new double*[rows] {};
 		for (int i = 0; i < rows; i++)
 			this->arr[i] = new double[cols] {};
 		cout << "DefaultConstruction\t" << this << endl;
 	}
-	Matrix(double** arr, const   int rows, const   int cols)		//array and measurements
+	Matrix(double** arr, const   int rows, const   int cols) :Matrix(rows, cols)
+		//array and measurements
 	{
-		this->rows = rows;
-		this->cols = cols;
-		//this->err = 0;
-		this->arr = new double*[rows] {};
-		for (int i = 0; i < rows; i++)
-			this->arr[i] = new double[cols] {};
 		for (int i = 0; i < rows; i++)
 			for (int j = 0; j < cols; j++)
 				this->arr[i][j] = arr[i][j];
 		cout << "array and measurements\t" << this << endl;
 	}
-	Matrix(const Matrix& other)									//Matrix
+	Matrix(const Matrix& other) :Matrix(other.arr, other.rows, other.cols)
+		//Matrix
 	{
-		this->rows = other.rows;
-		this->cols = other.cols;
-		//this->err = 0;
-		this->arr = new double*[rows] {};
-		for (int i = 0; i < rows; i++)
-			this->arr[i] = new double[cols] {};
-
 		for (int i = 0; i < rows; i++)
 			for (int j = 0; j < cols; j++)
 				this->arr[i][j] = other.arr[i][j];
