@@ -27,26 +27,10 @@ public:
 		return arr;
 	}
 	//		constructors
-	Matrix(int rows = 1, int cols = 1) :rows(rows), cols(cols), arr(new double* [this->rows] {})
-		// default or measurements
-	{
-		for (int i = 0; i < rows; i++)
-			this->arr[i] = new double[cols] {};
-		cout << "DefaultConstruction\t" << this << endl;
-	}
-	Matrix(double** arr, const   int rows, const   int cols) :Matrix(rows, cols)
-		//array and measurements
-	{
-		for (int i = 0; i < rows; i++)
-			for (int j = 0; j < cols; j++)
-				this->arr[i][j] = arr[i][j];
-		cout << "array and measurements\t" << this << endl;
-	}
-	Matrix(const Matrix& other) :Matrix(other.arr, other.rows, other.cols)
-		//Matrix
-	{
-		cout << "DeepCopy:\t\t" << this << endl; //Побитовое копирование
-	}
+	Matrix(int rows = 1, int cols = 1) :rows(rows), cols(cols), arr(new double* [this->rows] {});
+	Matrix(double** arr, const   int rows, const   int cols) :Matrix(rows, cols);
+	Matrix(const Matrix& other) :Matrix(other.arr, other.rows, other.cols);
+
 	~Matrix()
 	{
 		for (int i = 0; i < rows; i++)
@@ -284,6 +268,27 @@ public:
 		return *this;
 	}
 };  // CLass Matrix
+
+Matrix::Matrix(int rows = 1, int cols = 1) :rows(rows), cols(cols), arr(new double* [this->rows] {})
+// default or measurements
+{
+	for (int i = 0; i < rows; i++)
+		this->arr[i] = new double[cols] {};
+	cout << "DefaultConstruction\t" << this << endl;
+}
+Matrix::Matrix(double** arr, const   int rows, const   int cols) :Matrix(rows, cols)
+//array and measurements
+{
+	for (int i = 0; i < rows; i++)
+		for (int j = 0; j < cols; j++)
+			this->arr[i][j] = arr[i][j];
+	cout << "array and measurements\t" << this << endl;
+}
+Matrix::Matrix(const Matrix& other) :Matrix(other.arr, other.rows, other.cols)
+//Matrix
+{
+	cout << "DeepCopy:\t\t" << this << endl; //Побитовое копирование
+}
 
 Matrix operator*(const Matrix left, const Matrix right) //умножение двух матриц
 {
