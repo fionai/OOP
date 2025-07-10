@@ -27,9 +27,9 @@ public:
 		return arr;
 	}
 	//		constructors
-	Matrix(int rows = 1, int cols = 1) :rows(rows), cols(cols), arr(new double* [this->rows] {});
-	Matrix(double** arr, const   int rows, const   int cols) :Matrix(rows, cols);
-	Matrix(const Matrix& other) :Matrix(other.arr, other.rows, other.cols);
+	Matrix(int rows = 1, int cols = 1);
+	Matrix(double** arr, const   int rows, const   int cols) ;
+	Matrix(const Matrix& other) ;
 
 	~Matrix()
 	{
@@ -269,7 +269,7 @@ public:
 	}
 };  // CLass Matrix
 
-Matrix::Matrix(int rows = 1, int cols = 1) :rows(rows), cols(cols), arr(new double* [this->rows] {})
+Matrix::Matrix(int rows, int cols) :rows(rows), cols(cols), arr(new double* [this->rows] {})
 // default or measurements
 {
 	for (int i = 0; i < rows; i++)
