@@ -45,9 +45,6 @@ public:
 	Matrix(const Matrix& other) :Matrix(other.arr, other.rows, other.cols)
 		//Matrix
 	{
-		for (int i = 0; i < rows; i++)
-			for (int j = 0; j < cols; j++)
-				this->arr[i][j] = other.arr[i][j];
 		cout << "DeepCopy:\t\t" << this << endl; //Побитовое копирование
 	}
 	~Matrix()
